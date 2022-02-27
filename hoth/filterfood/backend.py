@@ -1,3 +1,6 @@
+from unittest import result
+
+
 def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghall = ""):
     food_types = {
         "vegetarian" : "/Content/Images/WebCodes/128px/v.png",
@@ -69,4 +72,4 @@ def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghal
                         f = False 
                 if f:
                     result.append(title.text)
-            return result
+    return result
