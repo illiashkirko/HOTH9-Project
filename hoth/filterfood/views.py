@@ -26,9 +26,10 @@ class FilterFoodView(APIView):
     #     return Response([{'filteredArray': array}]);
   
     def post(self, request):
-        print(request.data)
-        array = filteroptions([request.data["filter"]])
+        myinput = [request.data["filter"]]
+        array = filteroptions(myinput)
+
         # serializer = FilterFoodSerializer(data=request.data)
         # if serializer.is_valid(raise_exception=True):
         #     serializer.save()
-        return  Response([{'filteredArray': array}])
+        return  Response([{'out': array}])

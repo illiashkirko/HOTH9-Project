@@ -69,3 +69,6 @@ def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghal
                 if f:
                     result.append(title.text)
     return result
+
+# array = filteroptions(["Vegetarian Menu Option"])
+# print(array)
