@@ -1,4 +1,4 @@
-def filteroptions(dininghall, myinput):
+def filteroptions(month, day, year, meal, dininghall, myinput):
     food_types = {
         "vegetarian" : "/Content/Images/WebCodes/128px/v.png",
         "vegan" : "/Content/Images/WebCodes/128px/vg.png",
@@ -11,20 +11,30 @@ def filteroptions(dininghall, myinput):
         "contains_eggs" : "/Content/Images/WebCodes/128px/aegg.png",
         "contains_crustacean_shellfish" : "/Content/Images/WebCodes/128px/acsf.png",
         "contains_fish" : "/Content/Images/WebCodes/128px/afsh.png",
-        "hahal_menu_option" : "/Content/Images/WebCodes/128px/hal.png",
+        "halal_menu_option" : "/Content/Images/WebCodes/128px/hal.png",
         "low_carbon_footprint" : "/Content/Images/WebCodes/128px/lc.png",
         "high_carbon_footprint" : "/Content/Images/WebCodes/128px/hc.png"
     }
 
     import requests
+    import datetime
+    from datetime import date
     from bs4 import BeautifulSoup
 
-    URL = "https://menu.dining.ucla.edu/Menus"
+    mydate = datetime.datetime(year, month, day)
+    str = date.isoformat(mydate)
+    URL = "https://menu.dining.ucla.edu/Menus/" + str
     page = requests.get(URL)
-
     soup = BeautifulSoup(page.content, "html.parser")
     entire_page = soup.find(id="main-content")
-    dining_halls = entire_page.find_all("div", class_="menu-block third-col")
+    if meal == "breakfast":
+        dining_halls = entire_page.find_all("div", class_="menu-block half-col")
+    else:
+        dining_halls = entire_page.find_all("div", class_="menu-block third-col")
+    if meal == "dinner":
+        dining_halls.pop(0)
+        dining_halls.pop(0)
+        dining_halls.pop(0)
     filter = []
     for each in myinput:
         filter.append(food_types[each])
