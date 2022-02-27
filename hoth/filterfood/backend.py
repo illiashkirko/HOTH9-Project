@@ -1,22 +1,21 @@
 from unittest import result
 
-
 def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghall = ""):
     food_types = {
-        "vegetarian" : "/Content/Images/WebCodes/128px/v.png",
-        "vegan" : "/Content/Images/WebCodes/128px/vg.png",
-        "contains_peanuts" : "/Content/Images/WebCodes/128px/apnt.png",
-        "contains_tree_nuts" : "/Content/Images/WebCodes/128px/atnt.png",
-        "contains_wheat" : "/Content/Images/WebCodes/128px/awht.png",
-        "contains_gluten" : "/Content/Images/WebCodes/128px/agtn.png",
-        "contains_soy" : "/Content/Images/WebCodes/128px/asoy.png",
-        "contains_dairy" : "/Content/Images/WebCodes/128px/amlk.png",
-        "contains_eggs" : "/Content/Images/WebCodes/128px/aegg.png",
-        "contains_crustacean_shellfish" : "/Content/Images/WebCodes/128px/acsf.png",
-        "contains_fish" : "/Content/Images/WebCodes/128px/afsh.png",
-        "halal_menu_option" : "/Content/Images/WebCodes/128px/hal.png",
-        "low_carbon_footprint" : "/Content/Images/WebCodes/128px/lc.png",
-        "high_carbon_footprint" : "/Content/Images/WebCodes/128px/hc.png"
+        "Vegetarian Menu Option" : "/Content/Images/WebCodes/128px/v.png",
+        "Vegan Menu Option" : "/Content/Images/WebCodes/128px/vg.png",
+        "Contains Peanuts" : "/Content/Images/WebCodes/128px/apnt.png",
+        "Contains Tree Nuts" : "/Content/Images/WebCodes/128px/atnt.png",
+        "Contains Wheat" : "/Content/Images/WebCodes/128px/awht.png",
+        "Contains Gluten" : "/Content/Images/WebCodes/128px/agtn.png",
+        "Contains Soy" : "/Content/Images/WebCodes/128px/asoy.png",
+        "Contains Dairy" : "/Content/Images/WebCodes/128px/amlk.png",
+        "Contains Eggs" : "/Content/Images/WebCodes/128px/aegg.png",
+        "Contains Crustacean Shellfish" : "/Content/Images/WebCodes/128px/acsf.png",
+        "Contains Fish" : "/Content/Images/WebCodes/128px/afsh.png",
+        "Halal Menu Option" : "/Content/Images/WebCodes/128px/hal.png",
+        "Low Carbon Footprint" : "/Content/Images/WebCodes/128px/lc.png",
+        "High Carbon Footprint" : "/Content/Images/WebCodes/128px/hc.png"
     }
 
     import requests
@@ -25,6 +24,7 @@ def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghal
     from datetime import datetime
     from datetime import time
     from bs4 import BeautifulSoup
+    
     if day == -1:
         mydate = date.today()
     else:
@@ -34,19 +34,19 @@ def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghal
     hournow = timenow.hour
     if meal == "":
         if hournow < 11:
-            meal = "breakfast"
+            meal = "Breakfast"
         elif hournow < 15:
-            meal = "lunch"
-        else: meal = "dinner"
+            meal = "Lunch"
+        else: meal = "Dinner"
     URL = "https://menu.dining.ucla.edu/Menus/" + str
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
     entire_page = soup.find(id="main-content")
-    if meal == "breakfast":
+    if meal == "Breakfast":
         dining_halls = entire_page.find_all("div", class_="menu-block half-col")
     else:
         dining_halls = entire_page.find_all("div", class_="menu-block third-col")
-    if meal == "dinner":
+    if meal == "Dinner":
         dining_halls.pop(0)
         dining_halls.pop(0)
         dining_halls.pop(0)
