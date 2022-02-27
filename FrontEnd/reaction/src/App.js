@@ -37,9 +37,6 @@ function App() {
   */
 
   const [diningreturn,  setdiningreturn] = useState([
-    "Spaghetti & Meatballs",
-    "Steak bowl",
-    "Gyro"
   ]);
 
 
@@ -47,17 +44,19 @@ function App() {
     const URL = "http://127.0.0.1:8000/api/";
     // const target = "todos/1";
     const data = {
-      month: 2, 
-      day: 26,
-      year: 2022,
-      meal: "lunch",
-      diningHalls: "Bplate",
-      options: ["vegetarian","contains_peanuts" ,"contains_tree_nuts"]
+      month: -1, 
+      day: -1,
+      year: -1,
+      meal: "",
+      diningHalls: "",
+      filter: "Vegetarian Menu Option"
     }
 
     let raw = await fetch(URL, 
     {
       method: "POST",
+      mode: 'cors',
+      headers: new Headers({'content-type': 'application/json'}),
       body: JSON.stringify(data)
     });
     console.log(raw);
@@ -65,27 +64,29 @@ function App() {
     let response = await raw.json();
     console.log(response);
 
-    setdiningreturn(response);
+    if (response.length > 0) {
+      setdiningreturn(response[0].out);
+    }
   }
-
-  const renderStrings = diningreturn.map((element) => {
-    return <p>{element}</p>
+  const renderMenuItems = diningreturn.map((el) => {
+    return (
+      <p>{el}</p>
+    )
   })
-
   return (
     <div className="App">
    <h1> Vegan Warriors </h1>
 
   <Legend options={options} title= "Choose Diet" />
   <Legend options={diningHalls} title= "Choose dining"/>
-  <Legend options={date} title= "Day of month"/>
-  <Legend options={month} title="Month"/>
+  <Legend options={date} title= "Day of month (Leave blank if today)"/>
+  <Legend options={month} title="Month (Leave blank if today)"/>
   <Legend options={meal_period} title= "Meal Period (Choose One)"/>
 
     <button onClick={sendData}>Press Me</button>
     <div>
-      {renderStrings}
-    </div>
+      {renderMenuItems}
+      </div>
   </div>
   );
 }
