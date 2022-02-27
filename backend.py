@@ -25,14 +25,22 @@ def filteroptions(myinput):
     soup = BeautifulSoup(page.content, "html.parser")
     entire_page = soup.find(id="main-content")
     food_items = entire_page.find_all("li", class_="menu-item")
-    filter = food_types[myinput]
+    filter = []
+    for each in myinput:
+        filter.append(food_types[each])
     result = []
     for food_item in food_items:
         title = food_item.find("a")
         icons = food_item.find_all("img")
-        for img in icons:
-            img_source = img["src"]
-            if img_source == filter:
-                result.append(title.text)
-                break
+        f = True
+        for each in filter:
+            f2 = False
+            for img in icons:
+                img_source = img["src"]
+                if img_source == each:
+                    f2 = True
+            if (not f2):
+                f = False 
+        if f:
+            result.append(title.text)
     return result
