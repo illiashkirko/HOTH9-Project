@@ -39,8 +39,8 @@ function App() {
   const [diningreturn,  setdiningreturn] = useState({});
 
   const sendData = async () => {
-    const URL = "https://jsonplaceholder.typicode.com/";
-    const target = "todos/1";
+    const URL = "http://127.0.0.1:8000/api/";
+    // const target = "todos/1";
     const data = {
       month: 2, 
       day: 26,
@@ -50,11 +50,11 @@ function App() {
       options: ["Vegan Option"]
     }
 
-    let raw = await fetch(URL + target);
-    // {
-    //   method: "POST",
-    //   body: JSON.stringify(data)
-    // });
+    let raw = await fetch(URL, 
+    {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
     console.log(raw);
 
     let response = await raw.json();
@@ -75,7 +75,7 @@ function App() {
 
     <button onClick={sendData}>Press Me</button>
     <div>
-      {diningreturn.title}
+      {diningreturn.out}
     </div>
   </div>
   );

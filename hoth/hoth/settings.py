@@ -46,6 +46,8 @@ REST_FRAMEWORK={
     'DEFAULT_PERMISSION_CLASSES': [   'rest_framework.permissions.AllowAny' ]
 }
 
+TIME_ZONE='UTC-8'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
