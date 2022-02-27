@@ -21,8 +21,13 @@ Including another URLconf
 # ]
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework import routers
+from filterfood import views
+
+# router = routers.DefaultRouter()
+# router.register(r'filteredfood', views.FilterFoodView, 'filterfood')
 
 urlpatterns = [
-    path('filterfood/', include('filterfood.urls')),
+    path('api/', views.FilterFoodView.as_view(), name="something"),
     path('admin/', admin.site.urls),
 ]
