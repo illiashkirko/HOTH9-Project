@@ -1,4 +1,4 @@
-def filteroptions(myinput):
+def filteroptions(dininghall, myinput):
     food_types = {
         "vegetarian" : "/Content/Images/WebCodes/128px/v.png",
         "vegan" : "/Content/Images/WebCodes/128px/vg.png",
@@ -24,23 +24,27 @@ def filteroptions(myinput):
 
     soup = BeautifulSoup(page.content, "html.parser")
     entire_page = soup.find(id="main-content")
-    food_items = entire_page.find_all("li", class_="menu-item")
+    dining_halls = entire_page.find_all("div", class_="menu-block third-col")
     filter = []
     for each in myinput:
         filter.append(food_types[each])
     result = []
-    for food_item in food_items:
-        title = food_item.find("a")
-        icons = food_item.find_all("img")
-        f = True
-        for each in filter:
-            f2 = False
-            for img in icons:
-                img_source = img["src"]
-                if img_source == each:
-                    f2 = True
-            if (not f2):
-                f = False 
-        if f:
-            result.append(title.text)
-    return result
+    for dining_hall in dining_halls:
+        dininghallname = dining_hall.find("h3")
+        food_items = dining_hall.find_all("li", class_="menu-item")
+        if dininghallname.text == dininghall:
+            for food_item in food_items:
+                title = food_item.find("a")
+                icons = food_item.find_all("img")
+                f = True
+                for each in filter:
+                    f2 = False
+                    for img in icons:
+                        img_source = img["src"]
+                        if img_source == each:
+                            f2 = True
+                    if (not f2):
+                        f = False 
+                if f:
+                    result.append(title.text)
+            return result
