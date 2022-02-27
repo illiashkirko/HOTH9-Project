@@ -38,7 +38,6 @@ function App() {
 
   const [diningreturn,  setdiningreturn] = useState({});
 
-
   const sendData = async () => {
     const URL = "https://jsonplaceholder.typicode.com/";
     const target = "todos/1";
@@ -66,12 +65,13 @@ function App() {
 
   return (
     <div className="App">
+   <h1> Vegan Warriors </h1>
 
   <Legend options={options} title= "Choose Diet" />
   <Legend options={diningHalls} title= "Choose dining"/>
   <Legend options={date} title= "Day of month"/>
   <Legend options={month} title="Month"/>
-  <Legend options={meal_period} title="Meal Period (Choose One)"/>
+  <Legend options={meal_period} title= "Meal Period (Choose One)"/>
 
     <button onClick={sendData}>Press Me</button>
     <div>

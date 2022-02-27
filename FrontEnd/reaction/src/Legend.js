@@ -1,3 +1,5 @@
+import './App.css';
+
 import FormEntry from "./FormEntry"
 
 function Legend(props) {
@@ -9,7 +11,8 @@ function Legend(props) {
 
     return <div>
         <form>
-            <fieldset>
+            <fieldset className= "forms">
+
                 <legend>{props.title}</legend>
                 {checkboxes}
             </fieldset>
