@@ -19,14 +19,16 @@ from django.shortcuts import render
 class FilterFoodView(APIView):
     serializer_class = FilterFoodSerializer
   
-    def get(self, request):
-        array = filteroptions([request.query_params["filter"]])
-        print(request.data)
-        print(request.query_params)
-        return Response([{'filteredArray': array}]);
+    # def get(self, request):
+    #     array = filteroptions([request.query_params["filter"]])
+    #     print(request.data)
+    #     print(request.query_params)
+    #     return Response([{'filteredArray': array}]);
   
-    # def post(self, request):
-    #     serializer = FilterFoodSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return  Response(serializer.data)
+    def post(self, request):
+        print(request.data)
+        array = filteroptions([request.data["filter"]])
+        # serializer = FilterFoodSerializer(data=request.data)
+        # if serializer.is_valid(raise_exception=True):
+        #     serializer.save()
+        return  Response([{'filteredArray': array}])
