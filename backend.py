@@ -1,4 +1,4 @@
-def filteroptions(month, day, year, meal, dininghall, myinput):
+def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghall = ""):
     food_types = {
         "vegetarian" : "/Content/Images/WebCodes/128px/v.png",
         "vegan" : "/Content/Images/WebCodes/128px/vg.png",
@@ -19,10 +19,22 @@ def filteroptions(month, day, year, meal, dininghall, myinput):
     import requests
     import datetime
     from datetime import date
+    from datetime import datetime
+    from datetime import time
     from bs4 import BeautifulSoup
-
-    mydate = datetime.datetime(year, month, day)
+    if day == -1:
+        mydate = date.today()
+    else:
+        mydate = datetime.datetime(year, month, day)
     str = date.isoformat(mydate)
+    timenow = datetime.now().time()
+    hournow = timenow.hour
+    if meal == "":
+        if hournow < 11:
+            meal = "breakfast"
+        elif hournow < 15:
+            meal = "lunch"
+        else: meal = "dinner"
     URL = "https://menu.dining.ucla.edu/Menus/" + str
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -42,7 +54,7 @@ def filteroptions(month, day, year, meal, dininghall, myinput):
     for dining_hall in dining_halls:
         dininghallname = dining_hall.find("h3")
         food_items = dining_hall.find_all("li", class_="menu-item")
-        if dininghallname.text == dininghall:
+        if dininghallname.text == dininghall or dininghall == "":
             for food_item in food_items:
                 title = food_item.find("a")
                 icons = food_item.find_all("img")
