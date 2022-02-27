@@ -1,5 +1,3 @@
-from unittest import result
-
 def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghall = ""):
     food_types = {
         "Vegetarian Menu Option" : "/Content/Images/WebCodes/128px/v.png",
@@ -20,17 +18,15 @@ def filteroptions(myinput, month = -1, day = -1, year = -1, meal = "", dininghal
 
     import requests
     import datetime
-    from datetime import date
-    from datetime import datetime
-    from datetime import time
+    import time
     from bs4 import BeautifulSoup
-    
+
     if day == -1:
-        mydate = date.today()
+        mydate = datetime.date.fromtimestamp(time.time())
     else:
         mydate = datetime.datetime(year, month, day)
-    str = date.isoformat(mydate)
-    timenow = datetime.now().time()
+    str = mydate.isoformat()
+    timenow = datetime.datetime.now()
     hournow = timenow.hour
     if meal == "":
         if hournow < 11:
