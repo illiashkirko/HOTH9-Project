@@ -7,9 +7,9 @@ import { computeHeadingLevel } from '@testing-library/react';
 import { useState } from 'react';
 
 function App() {
-  const options = ["vegetarian", "vegan", "contains_peanuts", "contains_tree_nuts", "contains_wheat",
-                    "contains_gluten", "contains_soy", "contains_dairy", "contains_eggs", "contains_crustacean_shellfish",
-                  "contains_fish", "halal_menu_option", "low_carbon_footprint", "high_carbon_footprint",];
+  const options = ["Vegetarian Menu Option", "Vegan Menu Option", "Contains Peanuts", "Contains Tree Nuts", "Contains Wheat",
+                    "Contains Gluten", "Contains Soy", "Contains Dairy", "Contains Eggs", "Contains Crustacean Shellfish",
+                  "Contains Fish", "Halal Menu Option", "Low Carbon Footprint", "High Carbon Footprint",];
   const diningHalls = ["De Neve","Bruin Plate", "Epicuria"];
   const date = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   const month = [1,2,3,4,5,6,7,8,9,10,11,12];
@@ -75,7 +75,7 @@ function App() {
   })
   return (
     <div className="App">
-   <h1> Vegan Warriors </h1>
+   <h1> Dining Options Selector </h1>
 
   <Legend options={options} title= "Choose Diet" />
   <Legend options={diningHalls} title= "Choose dining"/>
