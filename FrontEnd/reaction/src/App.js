@@ -36,7 +36,12 @@ function App() {
   }
   */
 
-  const [diningreturn,  setdiningreturn] = useState({});
+  const [diningreturn,  setdiningreturn] = useState([
+    "Spaghetti & Meatballs",
+    "Steak bowl",
+    "Gyro"
+  ]);
+
 
   const sendData = async () => {
     const URL = "http://127.0.0.1:8000/api/";
@@ -47,7 +52,7 @@ function App() {
       year: 2022,
       meal: "lunch",
       diningHalls: "Bplate",
-      options: ["Vegan Option"]
+      options: ["vegetarian","contains_peanuts" ,"contains_tree_nuts"]
     }
 
     let raw = await fetch(URL, 
@@ -63,6 +68,10 @@ function App() {
     setdiningreturn(response);
   }
 
+  const renderStrings = diningreturn.map((element) => {
+    return <p>{element}</p>
+  })
+
   return (
     <div className="App">
    <h1> Vegan Warriors </h1>
@@ -75,7 +84,7 @@ function App() {
 
     <button onClick={sendData}>Press Me</button>
     <div>
-      {diningreturn.out}
+      {renderStrings}
     </div>
   </div>
   );
